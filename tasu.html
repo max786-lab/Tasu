@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposal for Tasu</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto&display=swap" rel="stylesheet">
+<style>
+body {margin:0; padding:0; font-family: 'Roboto', sans-serif; background: linear-gradient(to bottom, #ffe6f0, #fff0f5); display:flex; justify-content:center; align-items:center; height:100vh; overflow:hidden; position:relative;}
+.glow-bg {position:absolute; width:600px; height:600px; border-radius:50%; background: radial-gradient(circle, rgba(255,182,193,0.5) 0%, rgba(255,105,180,0.2) 60%, transparent 100%); filter:blur(100px); animation:glowPulse 4s ease-in-out infinite alternate; z-index:0;}
+@keyframes glowPulse {0%{transform:scale(1);}50%{transform:scale(1.1);}100%{transform:scale(1);}}
+.book-container {width:90%; max-width:380px; height:75vh; max-height:500px; position:relative; z-index:1;}
+.book {width:100%; height:100%; position:relative;}
+.cover, .page {position:absolute; width:100%; height:100%; border-radius:12px; box-shadow:0 15px 30px rgba(0,0,0,0.3); display:flex; flex-direction:column; justify-content:center; align-items:center; padding:5%; text-align:center; cursor:pointer;}
+.cover {background:linear-gradient(45deg, #ff3366, #ff6699); color:#fff; font-family:'Great Vibes', cursive; font-size:7vw; animation:pulse 2s infinite; user-select:none;}
+h2 {font-family:'Great Vibes', cursive; font-size:6vw; color:#ff3366; text-shadow:0 0 5px #ff3366, 0 0 10px #ff6699; animation:glow 2s infinite alternate;}
+.page {background:#fff0f5; color:#ff3366; opacity:0; display:none;}
+.page.show {opacity:1; display:flex;}
+.btn {margin:5px 0; padding:3% 5%; font-size:4vw; border:none; border-radius:20px; background:#ff6699; color:white; cursor:pointer; transition:0.3s;}
+.btn:hover {background:#ff3366; transform:scale(1.1);}
+@keyframes pulse {0%{transform:scale(1);}50%{transform:scale(1.1);}100%{transform:scale(1);}}
+@keyframes glow {0%{text-shadow:0 0 5px #ff3366,0 0 10px #ff6699;}100%{text-shadow:0 0 20px #ff3366,0 0 30px #ff6699;}}
+@keyframes shimmer {0% { box-shadow: 0 0 20px rgba(255,105,180,0.3); }50% { box-shadow: 0 0 40px rgba(255,105,180,0.6); }100% { box-shadow: 0 0 20px rgba(255,105,180,0.3); }}
+@media(max-width:480px){.cover{font-size:24px;} h2{font-size:22px;} .btn{font-size:14px; padding:10px 15px;}}
+</style>
+</head>
+<body>
+<div class="glow-bg"></div>
+<audio id="music" src="music.mp3" loop></audio>
+
+<div class="book-container">
+  <div class="book" id="book">
+    <div class="cover" id="cover">Click to Open Me 💖</div>
+
+    <!-- Pages -->
+    <div class="page" id="page1">
+      <h2>How I Noticed Tasu 🌸</h2>
+      <p>"Tere bina adhoora hoon main,<br>Tere saath hi poora hoon main.<br>Dil ki baat bas itni hai,<br>Kya tu mera ho jaayega?"</p>
+      <button class="btn" onclick="nextPage()">Next</button>
+      <button class="btn" onclick="prevPage()">Back ⬅️</button>
+    </div>
+
+    <div class="page" id="page2">
+      <h2>Why I Love Tasu ❤️</h2>
+      <p>"Tere saath har pal hai khaas,<br>Tere bina lagta hai sab kuch khaali sa.<br>Teri har baat, har ada, har nazar…<br>Isi liye tu meri duniya ka sabse pyara raaz hai."</p>
+      <button class="btn" onclick="nextPage()">Next</button>
+      <button class="btn" onclick="prevPage()">Back ⬅️</button>
+    </div>
+
+    <div class="page" id="page3">
+      <h2>Why Tasu Completes Me 💕</h2>
+      <p>"Tasu, tum meri khamoshi ki awaaz ho,<br>Har dhadkan mein basa tumhara raaz ho.<br>Tumhare bina har pal adhoora lagta hai,<br>Tumhare saath hi meri zindagi poora saaz ho."</p>
+      <button class="btn" onclick="nextPage()">Next</button>
+      <button class="btn" onclick="prevPage()">Back ⬅️</button>
+    </div>
+
+    <div class="page" id="page4">
+      <h2>Romantic Quote ✨</h2>
+      <p>"Falling for you wasn’t falling… it was finally rising to where I belong."</p>
+      <button class="btn" onclick="nextPage()">Next</button>
+      <button class="btn" onclick="prevPage()">Back ⬅️</button>
+    </div>
+
+    <!-- Final Page Step 1: Proposal -->
+    <div class="page" id="finalPage1">
+      <h2>My Proposal 💍</h2>
+      <p>From the moment I met you, I knew something in me had finally found its home.<br>You are my missing piece, my safest place. Will you be my forever, Tasu? 💖<br><br><strong>PGL always loves you 💖</strong></p>
+      <button class="btn" onclick="nextFinalPage()">Next 💌</button>
+      <button class="btn" onclick="prevPage()">Back ⬅️</button>
+    </div>
+
+    <!-- Final Page Step 2: Reply Chat -->
+    <div class="page" id="finalPage2">
+      <h2>Send Your Reply ✨</h2>
+      <div style="margin-top:15px; width:100%; display:flex; flex-direction:column; align-items:center;">
+        <input type="text" id="replyBox" placeholder="Type your reply here..." style="width:90%; padding:10px; border-radius:15px; border:1px solid #ff6699; margin-bottom:10px; font-size:16px;">
+        <button class="btn" onclick="showReply()">Show Reply 💌</button>
+        <button class="btn" onclick="sendReplyEmail()">Send via Gmail 📧</button>
+        <p id="displayReply" style="margin-top:10px; font-size:16px; color:#ff3366; text-align:center;"></p>
+      </div>
+      <button class="btn" onclick="prevFinalPage()">Back ⬅️</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const cover=document.getElementById('cover');
+const music=document.getElementById('music');
+music.volume=0;
+music.play();
+
+const pages=['page1','page2','page3','page4','finalPage1'];
+let current=-1;
+
+cover.addEventListener('click',()=>{nextPage(); fadeInMusic();});
+
+function nextPage(){if(current>=pages.length-1) return; current++; const page=document.getElementById(pages[current]); page.style.display='flex'; page.classList.add('show');}
+function prevPage(){if(current<=0) return; document.getElementById(pages[current]).style.display='none'; current--; document.getElementById(pages[current]).style.display='flex'; document.getElementById(pages[current]).classList.add('show');}
+
+function fadeInMusic(){let vol=0; const fade=setInterval(()=>{if(vol<0.4){vol+=0.01; music.volume=vol;}else clearInterval(fade);},100);}
+
+// Final Page navigation
+function nextFinalPage(){document.getElementById('finalPage1').style.display='none'; document.getElementById('finalPage2').style.display='flex'; document.getElementById('finalPage2').classList.add('show');}
+function prevFinalPage(){document.getElementById('finalPage2').style.display='none'; document.getElementById('finalPage1').style.display='flex'; document.getElementById('finalPage1').classList.add('show');}
+
+// Reply Chat Box functions
+function showReply(){const reply=document.getElementById('replyBox').value.trim(); if(reply===''){alert("Please type something first!"); return;} document.getElementById('displayReply').innerText="Tasu's reply: "+reply;}
+function sendReplyEmail(){const reply=document.getElementById('replyBox').value.trim(); if(reply===''){alert("Please type something to send!"); return;} const subject=encodeURIComponent("Tasu's reply 💖"); const body=encodeURIComponent(reply); window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=&su=${subject}&body=${body}`,'_blank');}
+</script>
+</body>
+</html>
